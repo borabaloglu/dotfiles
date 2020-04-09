@@ -1,0 +1,6 @@
+/** Configured For Applets **/
+
+configuration {
+  show-icons: true;
+}
+@import "/home/borabaloglu/.config/rofi/themes/onedark.rasi"

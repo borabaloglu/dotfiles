@@ -1,0 +1,27 @@
+[global_config]
+  always_split_with_profile = True
+  enabled_plugins = LaunchpadCodeURLHandler, APTURLHandler, LaunchpadBugURLHandler
+  inactive_color_offset = 0.802469135802
+[keybindings]
+  split_vert = <Primary><Shift>e
+[layouts]
+  [[default]]
+    [[[child1]]]
+      parent = window0
+      profile = OneDark
+      type = Terminal
+    [[[window0]]]
+      parent = ""
+      type = Window
+[plugins]
+[profiles]
+  [[default]]
+    cursor_color = "#ABB2BF"
+  [[OneDark]]
+    background_color = "#282C34"
+    background_darkness = 0.8
+    background_type = transparent
+    cursor_color = "#ABB2BF"
+    foreground_color = "#FFFFFF"
+    palette = "#000000:#E06C75:#95EE8F:#E5C07B:#61AFEF:#C678DD:#6CDCF7:#ABB2BF:#000000:#E06C75:#95EE8F:#E5C07B:#61AFEF:#C678DD:#6CDCF7:#FFFFFF"
+    show_titlebar = False

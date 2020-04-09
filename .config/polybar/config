@@ -1,0 +1,184 @@
+[bar/bar1]
+
+###############################################################################
+# DIMENSIONS
+###############################################################################
+
+# Size
+width = 100%
+height = 30
+offset-y = 0
+offset-x = 0
+
+# Border
+border-top-size = 0
+border-bottom-size = 0
+border-right-size = 0
+border-left-size = 0
+
+# Line
+line-size = 3
+
+###############################################################################
+# LOCATION
+###############################################################################
+
+bottom = false
+monitor = ${env:MONITOR:}
+override-redirect = false
+
+###############################################################################
+# FONTS
+###############################################################################
+
+font-0 = SF Mono:Semibold:size=9.5;3
+font-1 = Symbols Nerd Font:pixelsize=12;3
+
+###############################################################################
+# STYLE
+###############################################################################
+
+fixed-center = true
+
+# Padding
+padding-left = 0
+padding-right = 0
+
+# Margin
+module-margin = 1
+
+# Colors
+background = #282C34
+foreground = #FFFFFF
+
+###############################################################################
+# MISCELLANEOUS
+###############################################################################
+
+modules-left = i3
+modules-center = date
+modules-right = cpu pulseaudio-control wlan battery
+
+tray-position = none
+tray-detached = true
+
+###############################################################################
+# MODULES
+###############################################################################
+
+# WORKSPACES ##################################################################
+[module/i3]
+type = internal/i3
+pin-workspaces = false
+strip-wsnumbers = true
+index-sort = true
+enable-click = false
+enable-scroll = false
+wrapping-scroll = false
+reverse-scroll = false
+fuzzy-match = true
+format = <label-state> <label-mode>
+label-mode = %mode%
+label-mode-padding = 1
+label-mode-background = #E06C75
+label-focused = %index%
+label-focused-foreground = #282C34
+label-focused-background = #61AFEF
+label-focused-padding = 1
+label-unfocused = %index%
+label-unfocused-padding = 1
+label-visible = %index%
+label-visible-padding = 1
+
+# DATE ########################################################################
+[module/date]
+type = internal/date
+interval = 1.0
+date = %A, %d %B %Y
+time = %H:%M
+# Format
+format = <label>
+# Label
+label = %date%, %time%
+
+# CPU USAGE ###################################################################
+[module/cpu]
+type = internal/cpu
+interval = 0.5
+# Format
+format = <label>
+format-underline = #E5C07B
+format-padding = 1
+# Label
+label = CPU %percentage%%
+
+# AUDIO #######################################################################
+[module/pulseaudio-control]
+type = custom/script
+tail = true
+# Format
+format = <label>
+format-underline = #C678DD
+format-padding = 1
+# Label
+label = %output%
+exec = ~/.config/polybar/scripts/pulseaudio-control.bash listen
+click-right = exec pavucontrol &
+click-left = ~/.config/polybar/scripts/pulseaudio-control.bash togmute
+click-middle = ~/.config/polybar/scripts/pulseaudio-control.bash next-sink
+scroll-up = ~/.config/polybar/scripts/pulseaudio-control.bash up
+scroll-down = ~/.config/polybar/scripts/pulseaudio-control.bash down
+
+# WLAN ########################################################################
+[module/wlan]
+type = internal/network
+interface = wlo1
+interval = 5
+label-connected =  %essid%
+label-disconnected = 
+# Format connected
+format-connected = %{A1:$HOME/.config/polybar/scripts/wifi_widget.sh:}<label-connected>%{A}
+format-connected-underline = #6CDCF7
+format-connected-padding = 1
+# Format disconnected
+format-disconnected = <label-disconnected>
+format-disconnected-underline = #6CDCF7
+format-disconnected-padding = 1
+
+# BATTERY #####################################################################
+[module/battery]
+type = internal/battery
+battery = BAT0
+adapter = AC0
+poll-interval = 1
+full-at = 100
+# Label
+label-discharging = Discharging %percentage%%
+label-charging = Charging %percentage%%
+label-full = %percentage%%
+
+format-full = <ramp-capacity> <label-full>
+format-discharging = <ramp-capacity> <label-discharging>
+format-charging = <animation-charging> <label-charging>
+
+format-full-underline = #95EE8F
+format-charging-underline = #95EE8F
+format-discharging-underline = #E06C75
+
+format-full-padding = 1
+format-charging-padding = 1
+format-discharging-padding = 1
+
+ramp-capacity-0 = 
+ramp-capacity-1 = 
+ramp-capacity-2 = 
+ramp-capacity-3 = 
+ramp-capacity-4 = 
+
+animation-charging-0 = 
+animation-charging-1 = 
+animation-charging-2 = 
+animation-charging-3 = 
+animation-charging-4 = 
+
+animation-charging-framerate = 500
