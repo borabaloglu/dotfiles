@@ -1,3 +1,7 @@
+[colors]
+	background = "#040512"
+	foreground = "#2DA7D2"
+
 [global]
     # monitor = 0
     follow = none
@@ -9,7 +13,7 @@
     padding = 10
     horizontal_padding = 10
     frame_width = 2
-    frame_color = "#FFFFFF"
+    frame_color = "#2DA7D2"
     separator_color = frame
     sort = yes
     idle_threshold = 120
@@ -40,16 +44,16 @@
     mouse_right_click = close_current
 
 [urgency_normal]
-    background="#282C34"
+    background=colors.background
     foreground="#FFFFFF"
     timeout = 5
 
 [urgency_low]
-    background="#282C34"
+    background=colors.background
     foreground="#FFFFFF"
     timeout = 5
 
 [urgency_critical]
-    background="#E06C75"
+    background=colors.background
     foreground="#282C34"
     timeout = 8

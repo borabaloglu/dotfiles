@@ -1,0 +1,6 @@
+#!/bin/sh
+
+wpg -s ~/Pictures/$1
+~/.config/dunst/reload
+pkill spotify
+spicetify apply

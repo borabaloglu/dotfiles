@@ -1,3 +1,11 @@
+[colors]
+background = ${xrdb:color0:#222}
+foreground = ${xrdb:color7:#222}
+foreground-alt = ${xrdb:color7:#222}
+primary = ${xrdb:color1:#222}
+secondary = ${xrdb:color2:#222}
+alert = ${xrdb:color3:#222}
+
 [bar/bar1]
 
 ###############################################################################
@@ -33,6 +41,7 @@ override-redirect = false
 
 font-0 = SF Mono:Semibold:size=9.5;3
 font-1 = Symbols Nerd Font:pixelsize=12;3
+font-2 = FontAwesome:style=Regular:pixelsize=10;-2
 
 ###############################################################################
 # STYLE
@@ -41,23 +50,25 @@ font-1 = Symbols Nerd Font:pixelsize=12;3
 fixed-center = true
 
 # Padding
-padding-left = 0
-padding-right = 0
+padding-left = 1
+padding-right = 1
 
 # Margin
 module-margin = 1
 
 # Colors
-background = #282C34
-foreground = #FFFFFF
+# background = #282C34
+# foreground = #FFFFFF
+background = ${colors.background}
+foreground = ${colors.foreground}
 
 ###############################################################################
 # MISCELLANEOUS
 ###############################################################################
 
-modules-left = i3
-modules-center = date
-modules-right = cpu pulseaudio-control wlan battery
+modules-left = date spotify
+modules-center = i3
+modules-right = cpu pulseaudio-control wlan battery powermenu
 
 tray-position = none
 tray-detached = true
@@ -69,26 +80,45 @@ tray-detached = true
 # WORKSPACES ##################################################################
 [module/i3]
 type = internal/i3
-pin-workspaces = false
+pin-workspaces = true
 strip-wsnumbers = true
 index-sort = true
-enable-click = false
+enable-click = true
 enable-scroll = false
 wrapping-scroll = false
 reverse-scroll = false
 fuzzy-match = true
 format = <label-state> <label-mode>
+
 label-mode = %mode%
 label-mode-padding = 1
-label-mode-background = #E06C75
-label-focused = %index%
-label-focused-foreground = #282C34
-label-focused-background = #61AFEF
+label-mode-background = ${colors.alert}
+
+label-focused = %index%: %icon%
+label-focused-foreground = ${colors.foreground}
+label-focused-background = ${colors.primary}
 label-focused-padding = 1
-label-unfocused = %index%
+
+label-unfocused = %index%: %icon%
 label-unfocused-padding = 1
-label-visible = %index%
+
+label-visible = %index%: %icon%
 label-visible-padding = 1
+
+label-urgent = %index%: %icon%
+label-urgent-padding = 1
+
+ws-icon-0 = 0;
+ws-icon-1 = 1;
+ws-icon-2 = 2;
+ws-icon-3 = 3;
+ws-icon-4 = 4;
+ws-icon-5 = 5;
+ws-icon-6 = 6;
+ws-icon-7 = 7;
+ws-icon-8 = 8;
+ws-icon-9 = 9;
+ws-icon-default = 
 
 # DATE ########################################################################
 [module/date]
@@ -97,20 +127,21 @@ interval = 1.0
 date = %A, %d %B %Y
 time = %H:%M
 # Format
-format = <label>
+format =  <label>
+format-padding = 1
 # Label
 label = %date%, %time%
 
 # CPU USAGE ###################################################################
 [module/cpu]
 type = internal/cpu
-interval = 0.5
+interval = 1
 # Format
-format = <label>
-format-underline = #E5C07B
+format =  <label>
 format-padding = 1
 # Label
-label = CPU %percentage%%
+label = %percentage%%
+
 
 # AUDIO #######################################################################
 [module/pulseaudio-control]
@@ -118,7 +149,6 @@ type = custom/script
 tail = true
 # Format
 format = <label>
-format-underline = #C678DD
 format-padding = 1
 # Label
 label = %output%
@@ -138,11 +168,9 @@ label-connected =  %essid%
 label-disconnected = 
 # Format connected
 format-connected = %{A1:$HOME/.config/polybar/scripts/wifi_widget.sh:}<label-connected>%{A}
-format-connected-underline = #6CDCF7
 format-connected-padding = 1
 # Format disconnected
 format-disconnected = <label-disconnected>
-format-disconnected-underline = #6CDCF7
 format-disconnected-padding = 1
 
 # BATTERY #####################################################################
@@ -152,21 +180,29 @@ battery = BAT0
 adapter = AC0
 poll-interval = 1
 full-at = 100
-# Label
-label-discharging = Discharging %percentage%%
-label-charging = Charging %percentage%%
-label-full = %percentage%%
-
-format-full = <ramp-capacity> <label-full>
-format-discharging = <ramp-capacity> <label-discharging>
-format-charging = <animation-charging> <label-charging>
-
-format-full-underline = #95EE8F
-format-charging-underline = #95EE8F
-format-discharging-underline = #E06C75
-
+# Full
+# label-full = %percentage%%
+format-full = <ramp-capacity>
 format-full-padding = 1
+
+# Charging
+label-charging = %percentage%%
+format-charging =  <label-charging>
+# format-charging = <animation-charging> <label-charging>
 format-charging-padding = 1
+
+# animation-charging-0 = 
+# animation-charging-1 = 
+# animation-charging-2 = 
+# animation-charging-3 = 
+# animation-charging-4 = 
+#
+# animation-charging-framerate = 500
+
+# Discharging
+label-discharging = %percentage%%
+format-discharging = <ramp-capacity> <label-discharging>
+format-discharging-background = ${colors.alert}
 format-discharging-padding = 1
 
 ramp-capacity-0 = 
@@ -175,10 +211,40 @@ ramp-capacity-2 = 
 ramp-capacity-3 = 
 ramp-capacity-4 = 
 
-animation-charging-0 = 
-animation-charging-1 = 
-animation-charging-2 = 
-animation-charging-3 = 
-animation-charging-4 = 
+# POWER #######################################################################
+[module/powermenu]
+type = custom/menu
 
-animation-charging-framerate = 500
+# Label open
+label-open = ""
+label-open-background = ${colors.alert}
+label-open-padding = 1
+
+# Label close
+label-close = ""
+label-close-padding = 1
+label-close-background = ${colors.alert}
+
+# Label seperator
+label-separator = "/"
+label-separator-background = ${colors.alert}
+
+# Shutdown
+menu-0-0 = ""
+menu-0-0-padding = 1
+menu-0-0-background = ${colors.alert}
+menu-0-0-exec = systemctl poweroff
+
+# Reboot
+menu-0-1 = ""
+menu-0-1-padding = 1
+menu-0-1-background = ${colors.alert}
+menu-0-1-exec = systemctl reboot
+
+# SPOTIFY #####################################################################
+[module/spotify]
+type = custom/script
+interval = 1
+format =  <label>
+format-padding = 1
+exec = python ~/.config/polybar/scripts/spotify.py -f '{artist}: {song}'

@@ -27,3 +27,4 @@ code --install-extension deerawan.vscode-faker
 code --install-extension vscode-icons-team.vscode-icons
 code --install-extension wakatime.vscode-wakatime
 code --install-extension michelemelluso.code-beautifier
+code --install-extension dlasagno.wal-theme

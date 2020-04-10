@@ -2,5 +2,5 @@
 
 configuration {
   show-icons: true;
+  theme: "~/.cache/wal/colors-rofi-dark.rasi";
 }
-@import "/home/borabaloglu/.config/rofi/themes/onedark.rasi"
