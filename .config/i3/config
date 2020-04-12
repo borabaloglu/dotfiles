@@ -20,6 +20,12 @@ bindsym $mod+Shift+q kill
 # Start dmenu (a program launcher)
 bindsym $mod+d exec rofi -show drun
 
+# Start ranger file manager
+bindsym $mod+f exec urxvt -e sh -c "ranger"
+
+# Take screenshot
+bindsym --release $mod+F3 exec scrot '%Y-%m-%d_%H:%M_$wx$h.png' -e 'mv $f ~/Pictures/' --quality 100 --select
+
 # Change window focus
 bindsym $mod+Left focus left
 bindsym $mod+Down focus down
@@ -39,7 +45,7 @@ bindsym $mod+h split h
 bindsym $mod+v split v
 
 # Enter fullscreen mode for the focused container
-bindsym $mod+f fullscreen toggle
+bindsym $mod+Shift+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout stacking
@@ -171,16 +177,13 @@ client.placeholder      $bg     $bg     $fg  $bg       $bg
 
 client.background       $bg
 
-# Desktop wallpaper
-exec --no-startup-id wal -i ~/Pictures/
-
-# Enable lock screen
-# exec --no-startup-id betterlockscreen -l blur
+# Theme
+exec --no-startup-id change_theme wallpapers
 
 # Gaps
 for_window [class="^.*"] border pixel 2
 smart_gaps on
-gaps inner 5
+gaps inner 10
 gaps outer 0
 smart_borders no_gaps
 
@@ -199,8 +202,8 @@ assign [class="Firefox"] $ws2
 for_window [class="Firefox"] move to workspace $ws2
 
 # Assign files to workspace 4
-assign [class="Nautilus"] $ws4
-for_window [class="Nautilus"] move to workspace $ws4
+assign [class="Thunar"] $ws4
+for_window [class="Thunar"] move to workspace $ws4
 
 # Assign chat apps to workspace 6
 assign [class="Telegram"] $ws6
@@ -209,6 +212,8 @@ assign [class="Teams"] $ws6
 for_window [class="Teams"] move to workspace $ws6
 assign [class="Slack"] $ws6
 for_window [class="Slack"] move to workspace $ws6
+assign [class="discord"] $ws6
+for_window [class="discord"] move to workspace $ws6
 
 # Assign development utility apps to workspace 8
 assign [class="Postman"] $ws8
@@ -237,3 +242,9 @@ exec xrandr --output HDMI-0 --auto --right-of eDP-1-1
 
 # Launch touchpad indicator
 exec touchpad-indicator
+
+# Load resources
+exec xrdb -merge ~/.Xresources
+
+# Enable lock screen
+exec --no-startup-id betterlockscreen -l

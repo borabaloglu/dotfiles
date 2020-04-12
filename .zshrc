@@ -2,7 +2,7 @@
 export ZSH="/home/borabaloglu/.oh-my-zsh"
 
 # Set theme
-ZSH_THEME="bira"
+ZSH_THEME="lambda"
 
 # Plugins
 plugins=(git)

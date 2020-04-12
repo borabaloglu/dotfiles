@@ -1,6 +1,6 @@
 [colors]
-	background = "#040512"
-	foreground = "#2DA7D2"
+	background = "#0D0D16"
+	foreground = "#CE6B8F"
 
 [global]
     # monitor = 0
@@ -13,7 +13,7 @@
     padding = 10
     horizontal_padding = 10
     frame_width = 2
-    frame_color = "#2DA7D2"
+    frame_color = "#CE6B8F"
     separator_color = frame
     sort = yes
     idle_threshold = 120

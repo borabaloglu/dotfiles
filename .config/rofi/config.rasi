@@ -1,6 +1,7 @@
 /** Configured For Applets **/
 
 configuration {
-  show-icons: true;
-  theme: "~/.cache/wal/colors-rofi-dark.rasi";
+	show-icons: true;
+	display-drun: "";
+	theme: "~/.cache/wal/colors-rofi-dark.rasi";
 }
